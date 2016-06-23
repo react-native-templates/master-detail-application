@@ -16,14 +16,13 @@ import {
 
 import mixin from 'react-mixin'
 
-import Store from './store'
+import store from './store'
 import Emitter from 'EventEmitter'
 
 var navEvents = new Emitter()
 
 var _navigator
 
-const store = new Store()
 
 
 import Subscribable from 'Subscribable'
