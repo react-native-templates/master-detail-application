@@ -3,10 +3,7 @@
 _This is part of the Facebook Tel-Aviv React Native Hackathon._
 
 <h3 align="center">
-  <img src="media/rinja.png" alt="Rinja: the React Native Ninja" width="215px"/>
-  <br/>
-  <br/>
-  <img src="media/master-detail" alt="" width="280px"/>
+  <img src="media/master-detail.gif" alt="" width="280px"/>
 </h3>
 <br/>
 <br/>
