@@ -1,8 +1,8 @@
 {
   "name": "rn-master-detail-template",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "bin": {
-    "rn-master-detail-application": "./scripts/install.js"
+    "rn-master-detail-template": "./scripts/install.js"
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"

@@ -11,6 +11,28 @@ _This is part of the Facebook Tel-Aviv React Native Hackathon._
 This template is designed to do a master-detail layout for React Native, using nothing but
 React Native itself. There's no Redux or any other ecosystem component to avoid breakage,
 we also have decided not to adopt NavigatorExperimental just yet.
+## Quick Start
+
+Make a new React Native application:
+
+```
+$ react-native init MyNewApp
+$ cd MyNewApp
+```
+
+Install and run the template:
+
+```
+$ npm install -g rn-master-detail-template
+$ rn-master-detail-template
+copying template...
+installing dependencies...
+done!
+```
+
+Done!
+
+
 
 ## Components
 
