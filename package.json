@@ -1,17 +1,18 @@
 {
-  "name": "MasterDetailApplication",
+  "name": "rn-master-detail-application",
   "version": "0.0.1",
-  "private": true,
   "bin": {
     "rn-master-detail-application": "./scripts/install.js"
   },
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
+  "devDependencies":{
+    "react": "15.1.0",
+    "react-native": "0.28.0"
+  },
   "dependencies": {
     "fs-extra": "^0.30.0",
-    "react": "15.1.0",
-    "react-mixin": "^3.0.5",
-    "react-native": "0.28.0"
+    "react-mixin": "^3.0.5"
   }
 }
