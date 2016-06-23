@@ -4,25 +4,45 @@ import React, { Component } from 'react'
 import {
   View,
   StyleSheet,
+  Text,
+  TouchableOpacity,
 } from 'react-native'
 
-class Cell extends Component {
-  render () {
-    // gets props text, sectionID, rowID, onPress(), highlightRow()
-    return <View style={{ backgroundColor: 'blue' }}/>
-    <TouchableHighlight onPress={() => {
-      this.props.onPress(this.props.rowID);
-      this.props.highlightRow(this.props.sectionID, this.props.rowID);
-    }}>
-      <View>
-        <View style={styles.row}>
-          <Text style={styles.text}>
-            {this.props.text}
-          </Text>
+export default (props)=>{
+  return <TouchableOpacity style={styles.sep} onPress={props.onPress}>
+    <View style={{flexDirection:'row'}}>
+        <View style={styles.content}>
+          <Text style={styles.text}>{props.item}</Text>
         </View>
-      </View>
-    </TouchableHighlight>
-  }
+        <View style={styles.actions}>
+          <TouchableOpacity onPress={props.onDelete}>
+            <Text style={styles.actionText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+    </View>
+  </TouchableOpacity>
 }
 
-module.exports = Cell
+var styles = StyleSheet.create({
+  sep: {
+    borderBottomColor: '#c8c7cc',
+    borderBottomWidth: 0.5,
+    paddingTop: 15,
+    paddingRight: 15,
+    paddingBottom: 15,
+  },
+  actionText:{
+    color:'#4F8EF7'
+  },
+  text: {
+    color: '#333',
+    fontSize: 17,
+    fontWeight: '400',
+    marginBottom: -3.5,
+    marginTop: -3.5,
+  },
+  content:{
+    flexDirection:'row',
+    flex:1,
+  }
+})

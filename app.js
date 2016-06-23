@@ -14,38 +14,14 @@ import {
   View
 } from 'react-native';
 
-import mixin from 'react-mixin'
 
 import store from './store'
 import Emitter from 'EventEmitter'
-
-var navEvents = new Emitter()
-
-var _navigator
-
-
-
-import Subscribable from 'Subscribable'
+const navEvents = new Emitter()
 
 import Master from './master'
+import Detail from './detail'
 
-class Detail extends Component {
-  constructor(props){
-    super(props)
-    this.onSave = this.onSave.bind(this)
-  }
-  componentDidMount() {
-    this.addListenerOn(this.props.navEvents, 'save', this.onSave)
-  }
-  onSave(){
-     store.add(new Date().toString())
-     this.props.navigator.pop()
-  }
-  render(){
-    return <View style={{flex:1, backgroundColor:'white', paddingTop:64}}><Text>{this.props.item}</Text></View>
-  }
-}
-mixin(Detail.prototype, Subscribable.Mixin)
 
 class MasterDetailApplication extends React.Component {
   render(){
@@ -64,7 +40,6 @@ class MasterDetailApplication extends React.Component {
     )
   }
   navigatorRenderScene(route, navigator){
-     _navigator = navigator
      switch(route.id){
        case 'master':
          return <Master navigator={navigator}
@@ -81,14 +56,13 @@ class MasterDetailApplication extends React.Component {
 }
 
 
-var NavigationBarRouteMapper = {
+const NavigationBarRouteMapper = {
   LeftButton: function(route, navigator, index, navState) {
     if (index === 0) {
       return null;
     }
     var previousRoute = navState.routeStack[index - 1];
     return (
-
       <TouchableOpacity
         onPress={() => navigator.pop()}
         style={styles.navBarLeftButton}>
@@ -112,6 +86,9 @@ var NavigationBarRouteMapper = {
             </TouchableOpacity>
           )
        case 'detail':
+         if(route.props.item){
+           return <View/>
+         }
           return (
             <TouchableOpacity
               onPress={() => route.props.navEvents.emit("save") }
@@ -129,23 +106,6 @@ var NavigationBarRouteMapper = {
 };
 
 const styles = StyleSheet.create({
-  messageText: {
-    fontSize: 17,
-    fontWeight: '500',
-    padding: 15,
-    marginTop: 50,
-    marginLeft: 15,
-  },
-  button: {
-    backgroundColor: 'white',
-    padding: 15,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#CDCDCD',
-  },
-  buttonText: {
-    fontSize: 17,
-    fontWeight: '500',
-  },
   navBar: {
     backgroundColor: 'white',
   },
@@ -168,6 +128,7 @@ const styles = StyleSheet.create({
   },
   navBarButtonText: {
     color: "#000",
+    color:'#4F8EF7'
   },
 })
 AppRegistry.registerComponent('MasterDetailApplication', () => MasterDetailApplication);

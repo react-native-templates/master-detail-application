@@ -15,7 +15,6 @@ class Store {
     }
   }
 
-
   add(item){
     this.items = [...this.items, item]
     this.publish()
