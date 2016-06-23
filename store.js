@@ -3,7 +3,7 @@
 import Emitter from 'EventEmitter'
 
 
-export default class Store {
+class Store {
   constructor(){
     this.items = []
     this.events = new Emitter()
@@ -31,3 +31,6 @@ export default class Store {
 }
 
 
+const store = new Store()
+
+export default store
