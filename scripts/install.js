@@ -9,7 +9,7 @@ const wd = process.cwd()
 const files = fs.readdirSync(tmplDir)
 
 console.log("copying template...")
-.filter(file=>file.endsWith('.js'))
+files.filter(file=>file.endsWith('.js'))
 .forEach(file=>{
   fs.copySync(
     path.join(tmplDir, file),

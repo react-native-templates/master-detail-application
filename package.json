@@ -1,6 +1,6 @@
 {
-  "name": "rn-master-detail-application",
-  "version": "0.0.1",
+  "name": "rn-master-detail-template",
+  "version": "0.0.2",
   "bin": {
     "rn-master-detail-application": "./scripts/install.js"
   },
