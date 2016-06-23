@@ -33,7 +33,6 @@ done!
 Done!
 
 
-
 ## Components
 
 The structure is as simple as we could make it.
