@@ -55,7 +55,6 @@ class Master extends Component {
                                       }
                                       onDelete={()=>{
                                         this.props.store.remove(rowData)
-
                                       }}
                                     />}
           renderScrollComponent={(props) => <RecyclerViewBackedScrollView {...props} />}
