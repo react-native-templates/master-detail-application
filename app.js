@@ -27,26 +27,7 @@ var _navigator
 
 import Subscribable from 'Subscribable'
 
-class Master extends Component{
-  constructor(props){
-    super(props)
-    this.state = store.state()
-    this.onStoreChanged = this.onStoreChanged.bind(this)
-  }
-  componentDidMount() {
-    this.addListenerOn(store.events, 'update', this.onStoreChanged)
-  }
-  onStoreChanged(){
-    this.setState(store.state())
-  }
-  render(){
-    return <View style={{flex:1, paddingTop:100}}>
-      <Text>Items {this.state.items.length}</Text>
-    </View>
-
-  }
-}
-mixin(Master.prototype, Subscribable.Mixin)
+import Master from './master'
 
 class Detail extends Component {
   constructor(props){
@@ -57,11 +38,11 @@ class Detail extends Component {
     this.addListenerOn(this.props.navEvents, 'save', this.onSave)
   }
   onSave(){
-     store.add("item")
+     store.add(new Date().toString())
      this.props.navigator.pop()
   }
   render(){
-    return <View><Text>hello</Text></View>
+    return <View style={{flex:1, backgroundColor:'white', paddingTop:64}}><Text>{this.props.item}</Text></View>
   }
 }
 mixin(Detail.prototype, Subscribable.Mixin)

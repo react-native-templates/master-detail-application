@@ -21,7 +21,7 @@ class Store {
     this.publish()
   }
   remove(item){
-    this.items = this.items.filter(x=>x==item)
+    this.items = this.items.filter(x=>x!=item)
     this.publish()
   }
 
