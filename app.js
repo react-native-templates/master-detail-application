@@ -4,16 +4,15 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React from 'react'
 import {
   AppRegistry,
+  Navigator,
   StyleSheet,
   Text,
-  Navigator,
   TouchableOpacity,
   View
-} from 'react-native';
-
+} from 'react-native'
 
 import store from './store'
 import Emitter from 'EventEmitter'
@@ -22,13 +21,12 @@ const navEvents = new Emitter()
 import Master from './master'
 import Detail from './detail'
 
-
 class MasterDetailApplication extends React.Component {
-  render(){
-    return(
+  render () {
+    return (
       <Navigator
         style={styles.container}
-        initialRoute={{id:'master', title: "Items", props:{ navEvents }}}
+        initialRoute={{ id: 'master', title: 'Items', props: { navEvents } }}
         renderScene={this.navigatorRenderScene}
         navigationBar={
           <Navigator.NavigationBar
@@ -39,29 +37,29 @@ class MasterDetailApplication extends React.Component {
         />
     )
   }
-  navigatorRenderScene(route, navigator){
-     switch(route.id){
-       case 'master':
-         return <Master navigator={navigator}
-                        store={store}
-                        {...route.props}
-                        />
-       case 'detail':
-         return <Detail navigator={navigator}
-                        store={store}
-                        {...route.props}
-                        />
-     }
+
+  navigatorRenderScene (route, navigator) {
+    switch (route.id) {
+      case 'master':
+        return <Master navigator={navigator}
+                       store={store}
+                       {...route.props}
+                       />
+      case 'detail':
+        return <Detail navigator={navigator}
+                       store={store}
+                       {...route.props}
+                       />
+    }
   }
 }
 
-
 const NavigationBarRouteMapper = {
-  LeftButton: function(route, navigator, index, navState) {
+  LeftButton (route, navigator, index, navState) {
     if (index === 0) {
-      return null;
+      return null
     }
-    var previousRoute = navState.routeStack[index - 1];
+    var previousRoute = navState.routeStack[index - 1]
     return (
       <TouchableOpacity
         onPress={() => navigator.pop()}
@@ -70,65 +68,66 @@ const NavigationBarRouteMapper = {
           {previousRoute.title}
         </Text>
       </TouchableOpacity>
-    );
+    )
   },
 
-  RightButton: function(route, navigator, index, navState) {
-     switch(route.id){
-       case 'master':
-          return (
-            <TouchableOpacity
-              onPress={() => navigator.push({id: 'detail', title:"New", props:{ navEvents }}) }
-              style={styles.navBarRightButton}>
-              <Text style={[styles.navBarText, styles.navBarButtonText]}>
-                Add
-              </Text>
-            </TouchableOpacity>
-          )
-       case 'detail':
-         if(route.props.item){
-           return <View/>
-         }
-          return (
-            <TouchableOpacity
-              onPress={() => route.props.navEvents.emit("save") }
-              style={styles.navBarRightButton}>
-              <Text style={[styles.navBarText, styles.navBarButtonText]}>
-                Save
-              </Text>
-            </TouchableOpacity>
-          )
-     }
+  RightButton (route, navigator, index, navState) {
+    switch (route.id) {
+      case 'master':
+        return (
+          <TouchableOpacity
+            onPress={() => navigator.push({id: 'detail', title:'New', props:{ navEvents }}) }
+            style={styles.navBarRightButton}>
+            <Text style={[styles.navBarText, styles.navBarButtonText]}>
+              Add
+            </Text>
+          </TouchableOpacity>
+        )
+      case 'detail':
+        if (route.props.item) {
+          return <View/>
+        }
+        return (
+          <TouchableOpacity
+            onPress={() => route.props.navEvents.emit('save')}
+            style={styles.navBarRightButton}>
+            <Text style={[styles.navBarText, styles.navBarButtonText]}>
+              Save
+            </Text>
+          </TouchableOpacity>
+        )
+    }
   },
-  Title: function(route, navigator, index, navState) {
+
+  Title (route, navigator, index, navState) {
     return <Text style={[styles.navBarText, styles.navBarTitleText]}>{route.title}</Text>
-  },
-};
+  }
+}
 
 const styles = StyleSheet.create({
   navBar: {
-    backgroundColor: 'white',
+    backgroundColor: 'white'
   },
   navBarText: {
     fontSize: 16,
-    marginVertical: 10,
+    marginVertical: 10
   },
   navBarTitleText: {
-    color: "#000",
+    color: '#000',
     fontWeight: '500',
     marginVertical: 9,
     marginRight: 10,
-    marginLeft: 10,
+    marginLeft: 10
   },
   navBarLeftButton: {
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   navBarRightButton: {
-    paddingRight: 10,
+    paddingRight: 10
   },
   navBarButtonText: {
-    color: "#000",
-    color:'#4F8EF7'
-  },
+    color: '#4F8EF7'
+  }
 })
-AppRegistry.registerComponent('MasterDetailApplication', () => MasterDetailApplication);
+
+AppRegistry.registerComponent('MasterDetailApplication', () => MasterDetailApplication)

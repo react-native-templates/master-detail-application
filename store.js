@@ -1,34 +1,33 @@
-'use strict';
+'use strict'
 
 import Emitter from 'EventEmitter'
 
-
 class Store {
-  constructor(){
+  constructor () {
     this.items = []
     this.events = new Emitter()
   }
 
-  state(){
+  state () {
     return {
       items: this.items
     }
   }
 
-  add(item){
+  add (item) {
     this.items = [...this.items, item]
     this.publish()
   }
-  remove(item){
-    this.items = this.items.filter(x=>x!=item)
+
+  remove (item) {
+    this.items = this.items.filter((x) => x !== item)
     this.publish()
   }
 
-  publish(event, ...args){
+  publish (event, ...args) {
     this.events.emit('update')
   }
 }
-
 
 const store = new Store()
 

@@ -4,10 +4,7 @@ import React, { Component } from 'react'
 import {
   View,
   ListView,
-  Text,
   StyleSheet,
-  TouchableOpacity,
-  LayoutAnimation,
   RecyclerViewBackedScrollView
 } from 'react-native'
 import Subscribable from 'Subscribable'
@@ -20,7 +17,7 @@ const ds = new ListView.DataSource({
 })
 
 class Master extends Component {
-  constructor(props){
+  constructor (props) {
     super(props)
     this.state = {
       dataSource: ds.cloneWithRows(props.store.state().items)
@@ -28,11 +25,11 @@ class Master extends Component {
     this.onStoreChanged = this.onStoreChanged.bind(this)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.addListenerOn(this.props.store.events, 'update', this.onStoreChanged)
   }
 
-  onStoreChanged(){
+  onStoreChanged () {
     this.setState({
       dataSource: ds.cloneWithRows(this.props.store.state().items)
     })
@@ -42,18 +39,17 @@ class Master extends Component {
     return (
       <View style={styles.container}>
         <ListView
-          enableEmptySections={true}
+          enableEmptySections
           dataSource={this.state.dataSource}
-          renderRow={(rowData)=><Cell item={rowData}
-                                      onPress={
-                                        ()=>this.props.navigator.push(
+          renderRow={(rowData) => <Cell item={rowData}
+                                      onPress={() => this.props.navigator.push(
                                           { id: 'detail',
-                                            title:'Detail',
-                                            props:{ navEvents: this.props.navEvents,
-                                                    item:rowData }}
+                                            title: 'Detail',
+                                            props: { navEvents: this.props.navEvents,
+                                                    item: rowData }}
                                         )
                                       }
-                                      onDelete={()=>{
+                                      onDelete={() => {
                                         this.props.store.remove(rowData)
                                       }}
                                     />}
@@ -62,15 +58,15 @@ class Master extends Component {
       </View>
     )
   }
-
 }
+
 mixin(Master.prototype, Subscribable.Mixin)
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor:'white',
-    paddingLeft:15,
-    paddingTop:64,
+    backgroundColor: 'white',
+    paddingLeft: 15,
+    paddingTop: 64,
     flex: 1
   }
 })
